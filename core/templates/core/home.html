@@ -4,15 +4,100 @@
 {% block title %}Início - MedPronto{% endblock %}
 
 {% block content %}
-<div class="flex flex-col items-center justify-center min-h-[60vh] text-center">
-  <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-700 mb-4 drop-shadow-sm">
-    Bem-vindo ao MedPronto!
-  </h1>
-  <p class="text-lg sm:text-xl text-gray-700 max-w-2xl px-4">
-    Consultas médicas acessíveis, sem mensalidade e com agendamento online rápido e fácil.
-  </p>
-  <a href="#" class="mt-8 inline-block bg-blue-600 text-white px-8 py-3 rounded-full shadow-md hover:bg-blue-700 transition-all duration-300">
-    Agendar Consulta
-  </a>
-</div>
+<!-- HERO FUNCIONAL -->
+<section class="bg-gradient-to-br from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto text-center">
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-blue-700 mb-4 leading-tight">
+      Agende sua consulta sem mensalidade 💙
+    </h1>
+    <p class="text-gray-700 mb-6 text-base sm:text-lg">
+      Mais de 100 especialidades com valores acessíveis. Atendimento rápido e 100% online.
+    </p>
+
+    <!-- FORM FUNCIONAL -->
+    <form class="bg-white/80 backdrop-blur-md rounded-2xl shadow-md p-6 flex flex-col sm:flex-row gap-4 items-center justify-center">
+      <input type="text" placeholder="Ex: Dermatologia, Clínico Geral..."
+             class="flex-1 px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+      <button type="submit"
+              class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition w-full sm:w-auto">
+        Buscar Especialidade
+      </button>
+    </form>
+
+    <!-- LINKS DIRETOS -->
+    <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
+      <a href="{% url 'agendar' %}"
+         class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition">
+        Agendar agora
+      </a>
+      <a href="#"
+         class="inline-block border border-blue-600 text-blue-600 px-6 py-3 rounded-full font-medium hover:bg-blue-50 transition">
+        Fale conosco
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ESPECIALIDADES POPULARES -->
+<section class="mt-16 max-w-6xl mx-auto px-4">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Especialidades populares</h2>
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+    <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-4 text-center cursor-pointer hover:bg-blue-50">
+      <div class="text-blue-600 text-2xl mb-2">🩺</div>
+      <p class="text-sm font-medium text-gray-700">Clínico Geral</p>
+    </div>
+    <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-4 text-center cursor-pointer hover:bg-blue-50">
+      <div class="text-blue-600 text-2xl mb-2">👶</div>
+      <p class="text-sm font-medium text-gray-700">Pediatria</p>
+    </div>
+    <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-4 text-center cursor-pointer hover:bg-blue-50">
+      <div class="text-blue-600 text-2xl mb-2">🧠</div>
+      <p class="text-sm font-medium text-gray-700">Psiquiatria</p>
+    </div>
+    <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-4 text-center cursor-pointer hover:bg-blue-50">
+      <div class="text-blue-600 text-2xl mb-2">❤️</div>
+      <p class="text-sm font-medium text-gray-700">Cardiologia</p>
+    </div>
+    <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-4 text-center cursor-pointer hover:bg-blue-50">
+      <div class="text-blue-600 text-2xl mb-2">🩸</div>
+      <p class="text-sm font-medium text-gray-700">Ginecologia</p>
+    </div>
+    <div class="bg-white rounded-xl shadow hover:shadow-lg transition p-4 text-center cursor-pointer hover:bg-blue-50">
+      <div class="text-blue-600 text-2xl mb-2">💊</div>
+      <p class="text-sm font-medium text-gray-700">Dermatologia</p>
+    </div>
+  </div>
+</section>
+
+<!-- DESTAQUES -->
+<section class="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+  <div class="flex flex-col items-center">
+    <div class="bg-blue-100 text-blue-700 p-4 rounded-full text-2xl">🩺</div>
+    <p class="mt-2 text-lg font-semibold">+100 Especialidades</p>
+  </div>
+  <div class="flex flex-col items-center">
+    <div class="bg-blue-100 text-blue-700 p-4 rounded-full text-2xl">💸</div>
+    <p class="mt-2 text-lg font-semibold">Sem Mensalidade</p>
+  </div>
+  <div class="flex flex-col items-center">
+    <div class="bg-blue-100 text-blue-700 p-4 rounded-full text-2xl">⚡</div>
+    <p class="mt-2 text-lg font-semibold">Atendimento Rápido</p>
+  </div>
+</section>
+
+<!-- NÚMEROS DE CONFIANÇA -->
+<section class="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center text-blue-700 font-semibold">
+  <div>
+    <p class="text-3xl sm:text-4xl">+20</p>
+    <p class="text-sm text-gray-600">áreas</p>
+  </div>
+  <div>
+    <p class="text-3xl sm:text-4xl">+10 mil</p>
+    <p class="text-sm text-gray-600">pacientes atendidos</p>
+  </div>
+  <div>
+    <p class="text-3xl sm:text-4xl">Zero</p>
+    <p class="text-sm text-gray-600">mensalidade</p>
+  </div>
+</section>
 {% endblock %}
