@@ -3,11 +3,11 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-e87*+)j3!203y^h^(k-^+%8pq*h4=vyjc+#qasu*p2(e5gk*7f'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-e87*+)j3!203y^h^(k-^+%8pq*h4=vyjc+#qasu*p2(e5gk*7f')
 
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['medpronto.onrender.com', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -21,6 +21,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Adiciona suporte a arquivos estáticos no Render
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -70,16 +71,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# 🌍 Internacionalização
 LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 USE_TZ = True
 
-# 📦 Arquivos estáticos
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'core/static'),
-]
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core/static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Ativa compressão de arquivos estáticos no Render
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
