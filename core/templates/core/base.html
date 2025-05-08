@@ -5,6 +5,10 @@
   <meta charset="UTF-8">
   <title>{% block title %}MedPronto{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Agende consultas médicas com preço acessível, sem mensalidade. +100 especialidades. 100% online.">
+  <meta name="keywords" content="consulta médica, telemedicina, clínico geral, pediatria, dermatologia, MedPronto">
+  <meta name="author" content="MedPronto">
+  <meta name="robots" content="index, follow">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="{% static 'core/img/favicon.ico' %}">
@@ -14,9 +18,9 @@
     }
   </style>
 </head>
-<body class="relative min-h-screen text-gray-800">
+<body class="relative min-h-screen text-gray-800 pt-24">
 
-  <!-- Fundo com imagem e overlay CLARO -->
+  <!-- Fundo -->
   <div class="absolute inset-0 z-0">
     <img src="{% static 'core/img/bg1.png' %}" alt="Fundo" class="w-full h-full object-cover">
     <div class="absolute inset-0 bg-gradient-to-b from-white/80 via-white/60 to-white/30"></div>
@@ -24,51 +28,104 @@
 
   <div class="relative z-10 flex flex-col min-h-screen">
 
-    <!-- Navbar clara com responsividade -->
-    <nav class="bg-white/80 backdrop-blur-sm shadow-sm px-6 py-4">
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-md px-6 py-4">
       <div class="max-w-6xl mx-auto flex justify-between items-center">
         <div class="flex items-center gap-3">
           <img src="{% static 'core/img/logo.png' %}" alt="Logo MedPronto" class="h-9 w-9">
           <span class="text-xl font-semibold text-blue-700 drop-shadow-sm">MedPronto</span>
         </div>
-        <div class="hidden md:flex space-x-4 text-sm font-medium">
+        <div class="hidden md:flex items-center space-x-4 text-sm font-medium relative">
           <a href="{% url 'home' %}" class="text-gray-700 hover:text-blue-700">Início</a>
+
+          <!-- Dropdown com botão -->
+          <div class="relative">
+            <button id="dropdownToggle" class="text-gray-700 hover:text-blue-700 focus:outline-none">Sobre</button>
+            <div id="dropdownMenu" class="hidden absolute top-full mt-3 right-0 bg-white/95 backdrop-blur shadow-xl rounded-xl ring-1 ring-black/5 min-w-[220px] z-50 py-2">
+              <a href="{% url 'sobre' %}" class="block px-5 py-2 text-sm text-gray-700 hover:bg-blue-50 transition">Sobre nós</a>
+              <a href="{% url 'faq' %}" class="block px-5 py-2 text-sm text-gray-700 hover:bg-blue-50 transition">FAQ</a>
+              <a href="{% url 'fale_conosco' %}" class="block px-5 py-2 text-sm text-gray-700 hover:bg-blue-50 transition">Fale conosco</a>
+              <a href="{% url 'termos' %}" class="block px-5 py-2 text-sm text-gray-700 hover:bg-blue-50 transition">Termos de uso</a>
+              <a href="{% url 'politica' %}" class="block px-5 py-2 text-sm text-gray-700 hover:bg-blue-50 transition">Política de privacidade</a>
+            </div>
+          </div>
+
           <a href="{% url 'especialidades' %}" class="text-gray-700 hover:text-blue-700">Especialidades</a>
-          <a href="{% url 'agendar' %}" class="text-gray-700 hover:text-blue-700">Agendar</a>
-          <a href="{% url 'login' %}" class="text-gray-700 hover:text-blue-700">Login</a>
+          <a href="{% url 'login' %}" class="text-gray-700 hover:text-blue-700">Área do Usuário</a>
+          <a href="{% url 'agendar' %}" class="bg-blue-600 text-white px-4 py-2 rounded-md shadow hover:bg-blue-700 transition">Agendar</a>
         </div>
+
+        <!-- Botão Mobile -->
         <button id="menuToggle" class="md:hidden text-blue-700 focus:outline-none">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>
+
+      <!-- Mobile menu -->
       <div id="mobileMenu" class="md:hidden hidden flex-col mt-4 space-y-2 text-sm font-medium px-4">
         <a href="{% url 'home' %}" class="block text-gray-700 hover:text-blue-700">Início</a>
+        <a href="{% url 'sobre' %}" class="block text-gray-700 hover:text-blue-700">Sobre nós</a>
+        <a href="{% url 'faq' %}" class="block text-gray-700 hover:text-blue-700">FAQ</a>
+        <a href="{% url 'fale_conosco' %}" class="block text-gray-700 hover:text-blue-700">Fale conosco</a>
+        <a href="{% url 'termos' %}" class="block text-gray-700 hover:text-blue-700">Termos de uso</a>
+        <a href="{% url 'politica' %}" class="block text-gray-700 hover:text-blue-700">Política de privacidade</a>
         <a href="{% url 'especialidades' %}" class="block text-gray-700 hover:text-blue-700">Especialidades</a>
-        <a href="{% url 'agendar' %}" class="block text-gray-700 hover:text-blue-700">Agendar</a>
-        <a href="{% url 'login' %}" class="block text-gray-700 hover:text-blue-700">Login</a>
+        <a href="{% url 'login' %}" class="block text-gray-700 hover:text-blue-700">Área do Usuário</a>
+        <a href="{% url 'agendar' %}" class="block bg-blue-600 text-white text-center rounded-md py-2 hover:bg-blue-700 transition">Agendar</a>
       </div>
     </nav>
 
     <!-- Conteúdo -->
-    <main class="flex-1 px-6 py-10 max-w-4xl mx-auto">
+    <main class="flex-1 px-6 py-10 max-w-6xl mx-auto">
       {% block content %}{% endblock %}
     </main>
 
     <!-- Rodapé -->
-    <footer class="bg-white/70 text-center text-gray-600 text-sm py-4 border-t border-gray-200">
-      © 2025 MedPronto. Todos os direitos reservados.
+    <footer class="bg-white/70 backdrop-blur-sm border-t border-gray-200 text-gray-600 text-sm px-4 py-6 mt-10">
+      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+        <p>© 2025 MedPronto. Todos os direitos reservados.</p>
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-sm">
+          <a href="{% url 'politica' %}" class="hover:text-blue-600 transition">Política de Privacidade</a>
+          <a href="{% url 'termos' %}" class="hover:text-blue-600 transition">Termos de Uso</a>
+          <a href="{% url 'fale_conosco' %}" class="hover:text-blue-600 transition">Fale Conosco</a>
+        </div>
+      </div>
     </footer>
+
   </div>
 
-  <!-- Script para toggle do menu mobile -->
+  <!-- Scripts -->
   <script>
     const toggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     toggle.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
     });
+
+    const dropdownToggle = document.getElementById('dropdownToggle');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    dropdownToggle.addEventListener('click', () => {
+      dropdownMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        dropdownMenu.classList.add('hidden');
+      }
+    });
   </script>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/5511999999999" target="_blank"
+     class="fixed bottom-5 right-5 z-50 bg-green-500 text-white rounded-full p-4 shadow-lg hover:bg-green-600 transition-all"
+     title="Fale conosco no WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20.52 3.48A11.94 11.94 0 0 0 12 0C5.38 0 0 5.38 0 12c0 2.11.55 4.17 1.61 5.98L0 24l6.17-1.6A11.94 11.94 0 0 0 12 24c6.62 0 12-5.38 12-12 0-3.19-1.25-6.19-3.48-8.52zM12 22c-1.91 0-3.76-.5-5.4-1.44l-.38-.22-3.66.95.98-3.57-.25-.37A9.96 9.96 0 0 1 2 12C2 6.49 6.49 2 12 2s10 4.49 10 10-4.49 10-10 10z"/>
+    </svg>
+  </a>
+
 </body>
 </html>

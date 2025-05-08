@@ -1,0 +1,64 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Fale Conosco - MedPronto{% endblock %}
+
+{% block content %}
+<section class="max-w-4xl mx-auto px-4 py-16">
+  <h1 class="text-3xl font-bold text-blue-700 mb-6 text-center">Fale Conosco</h1>
+  <p class="text-gray-700 text-center max-w-xl mx-auto mb-10">
+    Precisa de ajuda, tem alguma sugestão ou deseja entrar em contato com a equipe MedPronto? Preencha o formulário abaixo ou fale conosco via WhatsApp.
+  </p>
+
+  <form method="POST" class="bg-white/90 backdrop-blur-md p-6 rounded-xl shadow space-y-4">
+    {% csrf_token %}
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Nome completo</label>
+      <input type="text" name="nome" class="w-full border rounded-md px-4 py-2 focus:ring focus:ring-blue-500" required>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">E-mail</label>
+      <input type="email" name="email" class="w-full border rounded-md px-4 py-2 focus:ring focus:ring-blue-500" required>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Mensagem</label>
+      <textarea name="mensagem" rows="4" class="w-full border rounded-md px-4 py-2 focus:ring focus:ring-blue-500" required></textarea>
+    </div>
+    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition">Enviar mensagem</button>
+  </form>
+
+  <div class="mt-12 text-center text-sm text-gray-600">
+    <p>Ou envie um WhatsApp para: <a href="https://wa.me/5511999999999" class="text-blue-600 hover:underline">(11) 99999-9999</a></p>
+    <p class="mt-1">Atendimento de segunda a sexta, das 8h às 18h.</p>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_page %}
+<!-- Termos de uso -->
+<section class="max-w-5xl mx-auto px-4 py-16">
+  <h1 class="text-3xl font-bold text-blue-700 mb-6 text-center">Termos de Uso</h1>
+
+  <div class="prose prose-blue max-w-none text-gray-800">
+    <p>Estes Termos de Uso regulam a utilização da plataforma MedPronto. Ao utilizar nossos serviços, você concorda com os termos abaixo.</p>
+
+    <h2>1. Objetivo do MedPronto</h2>
+    <p>Somos uma plataforma de agendamento de consultas com preços populares, sem mensalidade e com foco em atendimento acessível.</p>
+
+    <h2>2. Agendamentos</h2>
+    <p>As consultas são agendadas mediante pagamento online. Não garantimos a disponibilidade de profissionais em todas as regiões ou especialidades.</p>
+
+    <h2>3. Cancelamentos</h2>
+    <p>Cancelamentos devem ser solicitados com, no mínimo, 24 horas de antecedência para reembolso. Consulte nossa política de reembolsos para mais informações.</p>
+
+    <h2>4. Responsabilidades</h2>
+    <p>O MedPronto atua como intermediador. A responsabilidade do atendimento é do profissional de saúde. Não realizamos diagnóstico nem prescrição.</p>
+
+    <h2>5. Privacidade</h2>
+    <p>Os dados fornecidos são protegidos conforme nossa <a href="#" class="text-blue-600 hover:underline">Política de Privacidade</a>.</p>
+
+    <h2>6. Alterações</h2>
+    <p>Reservamo-nos o direito de modificar os termos a qualquer momento. Recomendamos revisão periódica.</p>
+  </div>
+</section>
+{% endblock %}

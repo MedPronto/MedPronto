@@ -12,35 +12,35 @@
 
 <!-- BUSCA -->
 <section class="max-w-2xl mx-auto mb-10 px-4">
-  <form class="flex flex-col sm:flex-row gap-4">
-    <input type="text" placeholder="Digite uma especialidade ou profissional" class="flex-1 px-4 py-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500">
+  <form class="flex flex-col sm:flex-row gap-4" onsubmit="return false;">
+    <input id="buscaEspecialidade" type="text" placeholder="Digite uma especialidade ou profissional" class="flex-1 px-4 py-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500">
     <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">Buscar</button>
   </form>
 </section>
 
 <!-- GRADE DE ESPECIALIDADES -->
-<section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 max-w-6xl mx-auto px-4">
-  <div class="bg-white rounded-xl shadow hover:shadow-lg transition text-center py-6 px-2 cursor-pointer hover:bg-blue-50">
+<section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 max-w-6xl mx-auto px-4" id="listaEspecialidades">
+  <div class="especialidade-card bg-white rounded-xl shadow hover:shadow-lg transition text-center py-6 px-2 cursor-pointer hover:bg-blue-50" data-nome="Clínico Geral">
     <div class="text-blue-600 text-3xl mb-2">🩺</div>
     <p class="text-sm font-semibold text-gray-800">Clínico Geral</p>
   </div>
-  <div class="bg-white rounded-xl shadow hover:shadow-lg transition text-center py-6 px-2 cursor-pointer hover:bg-blue-50">
+  <div class="especialidade-card bg-white rounded-xl shadow hover:shadow-lg transition text-center py-6 px-2 cursor-pointer hover:bg-blue-50" data-nome="Pediatria">
     <div class="text-blue-600 text-3xl mb-2">👶</div>
     <p class="text-sm font-semibold text-gray-800">Pediatria</p>
   </div>
-  <div class="bg-white rounded-xl shadow hover:shadow-lg transition text-center py-6 px-2 cursor-pointer hover:bg-blue-50">
+  <div class="especialidade-card bg-white rounded-xl shadow hover:shadow-lg transition text-center py-6 px-2 cursor-pointer hover:bg-blue-50" data-nome="Psiquiatria">
     <div class="text-blue-600 text-3xl mb-2">🧠</div>
     <p class="text-sm font-semibold text-gray-800">Psiquiatria</p>
   </div>
-  <div class="bg-white rounded-xl shadow hover:shadow-lg transition text-center py-6 px-2 cursor-pointer hover:bg-blue-50">
+  <div class="especialidade-card bg-white rounded-xl shadow hover:shadow-lg transition text-center py-6 px-2 cursor-pointer hover:bg-blue-50" data-nome="Cardiologia">
     <div class="text-blue-600 text-3xl mb-2">❤️</div>
     <p class="text-sm font-semibold text-gray-800">Cardiologia</p>
   </div>
-  <div class="bg-white rounded-xl shadow hover:shadow-lg transition text-center py-6 px-2 cursor-pointer hover:bg-blue-50">
+  <div class="especialidade-card bg-white rounded-xl shadow hover:shadow-lg transition text-center py-6 px-2 cursor-pointer hover:bg-blue-50" data-nome="Ginecologia">
     <div class="text-blue-600 text-3xl mb-2">🩸</div>
     <p class="text-sm font-semibold text-gray-800">Ginecologia</p>
   </div>
-  <div class="bg-white rounded-xl shadow hover:shadow-lg transition text-center py-6 px-2 cursor-pointer hover:bg-blue-50">
+  <div class="especialidade-card bg-white rounded-xl shadow hover:shadow-lg transition text-center py-6 px-2 cursor-pointer hover:bg-blue-50" data-nome="Dermatologia">
     <div class="text-blue-600 text-3xl mb-2">💊</div>
     <p class="text-sm font-semibold text-gray-800">Dermatologia</p>
   </div>
@@ -56,7 +56,18 @@
       <h3 class="text-xl font-semibold text-blue-700">Dr. Fernando Jacomossi</h3>
       <p class="text-sm text-gray-700">Médico Generalista</p>
       <p class="text-sm text-gray-600 mt-1">Sorocaba - SP • Teleconsulta</p>
-      <p class="text-sm text-gray-600 mt-1">Avaliação: ⭐ 5,0 (X avaliações)</p>
+      <p class="text-sm text-gray-600 mt-1">
+        Avaliação:
+        {% for i in "12345" %}
+         {% if forloop.counter <= medico.nota|floatformat:0 %}
+            ⭐
+         {% else %}
+            ☆
+         {% endif %}
+        {% endfor %}
+       <span class="ml-1 font-semibold">{{ medico.nota|floatformat:1 }}</span>
+       ({{ medico.total_avaliacoes }} avaliações)
+      </p>
       <p class="text-sm text-gray-800 font-semibold mt-2">R$ X <span class="text-gray-500 text-xs">(em até x)</span></p>
     </div>
     <div>
@@ -64,4 +75,18 @@
     </div>
   </div>
 </section>
+
+<!-- SCRIPT DE BUSCA -->
+<script>
+  const input = document.getElementById('buscaEspecialidade');
+  const cards = document.querySelectorAll('.especialidade-card');
+
+  input.addEventListener('input', function () {
+    const termo = this.value.toLowerCase();
+    cards.forEach(card => {
+      const nome = card.getAttribute('data-nome').toLowerCase();
+      card.style.display = nome.includes(termo) ? 'block' : 'none';
+    });
+  });
+</script>
 {% endblock %}

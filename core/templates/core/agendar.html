@@ -1,12 +1,13 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block title %}Agendar Consulta - MedPronto{% endblock %}
 
 {% block content %}
-<!-- HERO DE AGENDAMENTO -->
 <section class="relative bg-gradient-to-br from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
     <!-- Texto -->
     <div>
       <h1 class="text-4xl font-extrabold text-blue-700 mb-4 leading-tight">
@@ -22,35 +23,58 @@
       </ul>
     </div>
 
-    <!-- Formulário -->
-    <form class="bg-white/80 backdrop-blur-md shadow-xl rounded-2xl p-6 space-y-5">
+    <!-- Formulário funcional -->
+    <form method="POST" class="bg-white/80 backdrop-blur-md shadow-xl rounded-2xl p-6 space-y-5 animate-fade-in">
+      {% csrf_token %}
+
+      {% if messages %}
+        {% for message in messages %}
+          <div class="{% if message.tags == 'success' %}bg-green-100 border-green-300 text-green-800{% else %}bg-red-100 border-red-300 text-red-800{% endif %} border text-sm rounded-md p-3 shadow transition-opacity duration-700 ease-out">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      {{ form.non_field_errors }}
+
       <div>
         <label class="block text-sm font-medium text-gray-700">Nome completo</label>
-        <input type="text" placeholder="Ex: João da Silva" class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500">
+        {% render_field form.nome class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Ex: João da Silva" %}
+        {{ form.nome.errors }}
       </div>
+
       <div>
         <label class="block text-sm font-medium text-gray-700">E-mail</label>
-        <input type="email" placeholder="Ex: joao@email.com" class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500">
+        {% render_field form.email class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Ex: joao@email.com" %}
+        {{ form.email.errors }}
       </div>
+
       <div>
         <label class="block text-sm font-medium text-gray-700">Especialidade</label>
-        <select class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500">
-          <option disabled selected>Escolha uma especialidade</option>
-          <option>Clínico Geral</option>
-          <option>Pediatria</option>
-          <option>Ginecologia</option>
-          <option>Dermatologia</option>
-          <option>Cardiologia</option>
-        </select>
+        {% render_field form.especialidade class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Ex: Cardiologia" %}
+        {{ form.especialidade.errors }}
       </div>
+
       <div>
         <label class="block text-sm font-medium text-gray-700">Data desejada</label>
-        <input type="date" class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500">
+        {% render_field form.data class="w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500" %}
+        {{ form.data.errors }}
       </div>
+
       <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-3 rounded-md hover:bg-blue-700 transition-all">
         Confirmar Agendamento
       </button>
     </form>
   </div>
 </section>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+</style>
 {% endblock %}
