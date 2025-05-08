@@ -4,70 +4,88 @@
 {% block title %}Início - MedPronto{% endblock %}
 
 {% block content %}
-<!-- HERO FUNCIONAL -->
-<section class="bg-gradient-to-br from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-4xl mx-auto text-center">
-    <h1 class="text-3xl sm:text-4xl font-extrabold text-blue-700 mb-4 leading-tight">
-      Agende sua consulta sem mensalidade 💙
-    </h1>
-    <p class="text-gray-700 mb-6 text-base sm:text-lg">
-      Mais de 100 especialidades com valores acessíveis. Atendimento rápido e 100% online.
-    </p>
+<section class="bg-white/30 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-12 items-center gap-12">
 
-    <!-- FORM FUNCIONAL -->
-    <form class="bg-white/80 backdrop-blur-md rounded-2xl shadow-md p-6 flex flex-col sm:flex-row gap-4 items-center justify-center">
-      <input type="text" placeholder="Ex: Dermatologia, Clínico Geral..."
-             class="flex-1 px-4 py-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
-      <button type="submit"
-              class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition w-full sm:w-auto">
-        Buscar Especialidade
-      </button>
-    </form>
-
-    <!-- LINKS DIRETOS -->
-    <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
-      <a href="{% url 'agendar' %}"
-         class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition">
-        Agendar agora
-      </a>
-      <a href="{% url 'fale_conosco' %}"
-         class="inline-block border border-blue-600 text-blue-600 px-6 py-3 rounded-full font-medium hover:bg-blue-50 transition">
-        Fale conosco
-      </a>
+    <!-- IMAGEM -->
+    <div class="hidden md:block col-span-5">
+      <img src="{% static 'core/img/hero5.png' %}" alt="Equipe médica"
+           class="w-full rounded-3xl border border-gray-200 shadow-lg transition-all duration-700 ease-in-out hover:scale-105">
     </div>
+
+    <!-- TEXTO E FORMULÁRIO -->
+    <div class="col-span-12 md:col-span-7 text-center md:text-left">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-blue-700 mb-2 leading-tight">
+        Agende sua consulta com valores acessíveis 💙
+      </h1>
+      <p class="text-gray-700 mb-4 text-base sm:text-lg">
+        Atendimento rápido, 100% online e sem assinar mensalidade.
+      </p>
+
+      <form class="bg-white/80 backdrop-blur-md rounded-2xl shadow-md p-4 flex flex-col sm:flex-row gap-4 items-center justify-start relative">
+        <div class="relative w-full">
+          <input type="text" placeholder="Ex: Dermatologia, Clínico Geral..."
+                 class="w-full pl-10 pr-4 py-3 border-2 border-blue-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white/70 text-gray-800">
+          <svg class="absolute left-3 top-3.5 w-5 h-5 text-blue-500" fill="none" stroke="currentColor" stroke-width="2"
+               viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 18.5a7.5 7.5 0 006.15-3.85z"/></svg>
+        </div>
+        <button type="submit"
+                class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition w-full sm:w-auto">
+          Buscar Especialidade
+        </button>
+      </form>
+
+      <div class="mt-6 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+        <a href="{% url 'agendar' %}" class="bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition text-center">
+          Agendar agora
+        </a>
+        <a href="{% url 'fale_conosco' %}" class="border border-blue-600 text-blue-600 px-6 py-3 rounded-full font-medium hover:bg-blue-50 transition text-center">
+          Fale conosco
+        </a>
+      </div>
+
+      <div class="mt-4 text-sm text-gray-500 flex items-center gap-2 justify-center md:justify-start">
+        <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" stroke-width="2"
+             viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        +2 mil pacientes atendidos com avaliação de 5.0 ⭐
+      </div>
+    </div>
+
   </div>
 </section>
+
 
 <!-- ESPECIALIDADES POPULARES -->
 <section class="mt-16 max-w-6xl mx-auto px-4">
   <h2 class="text-2xl font-bold text-gray-900 drop-shadow-sm mb-6 text-center">Especialidades populares</h2>
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
     <div class="bg-white/90 backdrop-blur rounded-xl shadow hover:shadow-lg transition p-4 text-center cursor-pointer hover:bg-blue-50">
-      <div class="text-blue-600 text-2xl mb-2">🩺</div>
+      <img src="{% static 'core/icons/stethoscope.svg' %}" alt="Clínico Geral" class="w-6 h-6 mx-auto mb-2">
       <p class="text-sm font-medium text-gray-800">Clínico Geral</p>
     </div>
     <div class="bg-white/90 backdrop-blur rounded-xl shadow hover:shadow-lg transition p-4 text-center cursor-pointer hover:bg-blue-50">
-      <div class="text-blue-600 text-2xl mb-2">👶</div>
+      <img src="{% static 'core/icons/baby.svg' %}" alt="Pediatria" class="w-6 h-6 mx-auto mb-2">
       <p class="text-sm font-medium text-gray-800">Pediatria</p>
     </div>
     <div class="bg-white/90 backdrop-blur rounded-xl shadow hover:shadow-lg transition p-4 text-center cursor-pointer hover:bg-blue-50">
-      <div class="text-blue-600 text-2xl mb-2">🧐</div>
+      <img src="{% static 'core/icons/brain.svg' %}" alt="Psiquiatria" class="w-6 h-6 mx-auto mb-2">
       <p class="text-sm font-medium text-gray-800">Psiquiatria</p>
     </div>
     <div class="bg-white/90 backdrop-blur rounded-xl shadow hover:shadow-lg transition p-4 text-center cursor-pointer hover:bg-blue-50">
-      <div class="text-blue-600 text-2xl mb-2">❤️</div>
+      <img src="{% static 'core/icons/heart.svg' %}" alt="Cardiologia" class="w-6 h-6 mx-auto mb-2">
       <p class="text-sm font-medium text-gray-800">Cardiologia</p>
     </div>
     <div class="bg-white/90 backdrop-blur rounded-xl shadow hover:shadow-lg transition p-4 text-center cursor-pointer hover:bg-blue-50">
-      <div class="text-blue-600 text-2xl mb-2">🩸</div>
+      <img src="{% static 'core/icons/droplet.svg' %}" alt="Ginecologia" class="w-6 h-6 mx-auto mb-2">
       <p class="text-sm font-medium text-gray-800">Ginecologia</p>
     </div>
     <div class="bg-white/90 backdrop-blur rounded-xl shadow hover:shadow-lg transition p-4 text-center cursor-pointer hover:bg-blue-50">
-      <div class="text-blue-600 text-2xl mb-2">💊</div>
+      <img src="{% static 'core/icons/pill.svg' %}" alt="Dermatologia" class="w-6 h-6 mx-auto mb-2">
       <p class="text-sm font-medium text-gray-800">Dermatologia</p>
     </div>
   </div>
 </section>
+
 
 <!-- COMO FUNCIONA -->
 <section class="mt-20 max-w-6xl mx-auto px-4">
